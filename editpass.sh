@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Directory containing passwords
-PASSWORDS=~/Documents/Lastonestanding/Properties
+PASSWORDS=
 # File containing passwords
-FILE=.savefiles.txt
+FILE=
 # Access Password
 MASTERPASS="r@cjjm%8"
 
