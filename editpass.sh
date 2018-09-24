@@ -5,7 +5,7 @@ PASSWORDS=
 # File containing passwords
 FILE=
 # Access Password
-MASTERPASS="r@cjjm%8"
+MASTERPASS=""
 
 if [ "$#" == 0 ] || [ $# -gt 1 ]; then
   echo 'Usage: editpass [platform-name]'
