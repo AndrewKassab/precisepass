@@ -4,7 +4,6 @@
 PASSWORDS=
 #File containing passwords
 FILE=
-# Access Password
 
 if [ "$#" -gt 0 ]; then
   echo 'Usage: addpass'
