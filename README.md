@@ -1,10 +1,9 @@
 # precisepass
 
-DESCRIPTION:
   This is a simple password manager that works both natively on linux or on the Windows Subsystem for Linux.
   This password manager can easily retrieve your passwords and copy them to your clipboard.
   
-BEFORE USING: 
+# BEFORE USING: 
 - You must first create an empty password.txt file.
 - The scripts must be edited to include the directory path for the password file and the name of the password file.
 - Change the MASTERPASS variable in getpass.sh and editpass.sh to a custom password that allows access to the rest.
