@@ -1,6 +1,6 @@
 # precisepass
 
-  This is a simple password manager that works both natively on linux or on the Windows Subsystem for Linux.
+  This is a simple password manager that works both natively on Linux or on the Windows Subsystem for Linux.
   This password manager can easily retrieve your passwords and copy them to your clipboard.
   
 # BEFORE USING: 
