@@ -19,7 +19,7 @@ ALIAS' CREATION:
 - alias editpass='bash ~/"directory_containing_scripts/editpass.sh'
 - alias addpass='bash ~/"directory_containing_scripts"/addpass.sh'
 
-USAGE / MANUAL:
+# USAGE / MANUAL:
 - addpass: type addpass and you will be prompted for the name of the platform, username, and password being added.
 - getpass: getpass "platform_name" , will return the password for the platform parameter you include, E.G, getpass bank.
 - editpass: editpass "platform_name", allows you to change the password for the platform parameter, E.G, editpass bank.
