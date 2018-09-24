@@ -1,4 +1,4 @@
-# password
+# passwordmanager
 
 DESCRIPTION:
   This is a simple password manager that works both natively on linux or on the Windows Subsystem for Linux.
