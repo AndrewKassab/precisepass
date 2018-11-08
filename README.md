@@ -3,6 +3,26 @@
   This is a simple password manager that works both natively on Linux or on the Windows Subsystem for Linux.
   This password manager can easily retrieve your passwords and copy them to your clipboard.
   
+# Project Details
+
+  This project was created as a way for me to get more familiar with bash scripting and linux commands in 
+  general. I already keep my passwords in a hidden file as backuo and had the idea of creating a tool 
+  to retrieve them and just expanded upon that.
+
+# What I learned:
+
+  - Logic of scripting in bash (if-statements, etc.)
+  - Using linux variables
+  - Basic commands in linux
+  - Passing in parameters to a script
+  - Turning scripts into commands in the linux environment 
+  - Adapting the script to work on different platforms
+  
+# Goals
+  
+  - Eliminate need for several scripts, instead use modifiers -g (get) -a (add) -e (edit)
+  - Add encription to passwords 
+  
 # BEFORE USING: 
 - You must first create an empty password.txt file.
 - The scripts must be edited to include the directory path for the password file and the name of the password file.
