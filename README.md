@@ -6,7 +6,7 @@
 # Project Details
 
   This project was created as a way for me to get more familiar with bash scripting and linux commands in 
-  general. I already keep my passwords in a hidden file as backuo and had the idea of creating a tool 
+  general. I already keep my passwords in a hidden file as backup and had the idea of creating a tool 
   to retrieve them and just expanded upon that.
 
 # What I learned:
