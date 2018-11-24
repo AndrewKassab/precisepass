@@ -58,9 +58,6 @@ function get {
     # Change line number to the line with password rather than the username
     LINENUMBER=$((LINENUMBER+1))
 
-    # Prints out password
-    echo `cat $FILE | head -n $LINENUMBER | tail -n 1` 
-
     # Copys password to the clipboard
     # LINUX VERSION
     echo `cat $FILE | head -n $LINENUMBER | tail -n 1 | cut -c11-27` | xclip -sel clip
@@ -263,7 +260,7 @@ fi
 
 # No modifier passed in
 if [ "$#" == 0 ]; then
-    printf $USAGE
+    echo $USAGE
     exit 1
 fi
 
