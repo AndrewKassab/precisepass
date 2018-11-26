@@ -21,7 +21,7 @@ function get {
     cd $PASSWORDS
 
     # search for that platform within the file
-    OUTPUT=`sudo cat $FILE | grep -i $1`
+    OUTPUT=`cat $FILE | grep -i $1`
 
     TEST=`echo $OUTPUT | cut -c1-7`
     
@@ -44,7 +44,7 @@ function get {
     fi
 
     # Ignore case, add line number
-    OUTPUT=`sudo grep -inr $1 $FILE`
+    OUTPUT=`grep -inr $1 $FILE`
 
     # Remove and store just the line number
     LINENUMBER=`echo ${OUTPUT%%:*}` 
@@ -53,15 +53,13 @@ function get {
     LINENUMBER=$((LINENUMBER+1))
 
     # Prints out username
-    echo `sudo cat $FILE | head -n $LINENUMBER | tail -n 1` 
+    echo `cat $FILE | head -n $LINENUMBER | tail -n 1` 
 
     # Change line number to the line with password rather than the username
     LINENUMBER=$((LINENUMBER+1))
 
-    echo `sudo cat $FILE | head -n $LINENUMBER | tail -n 1` 
-
     # Copys password to the clipboard
-    echo `sudo cat $FILE | head -n $LINENUMBER | tail -n 1 | cut -c11-27` | clip.exe
+    echo `cat $FILE | head -n $LINENUMBER | tail -n 1 | cut -c11-27` >> ~/tmppsfile
     echo *Password copied to clipboard*
 
 }
@@ -76,6 +74,7 @@ function add {
     # First time user, create password file and set permissions
     if [ ! -f $FILE ]; then
         touch $FILE
+        echo "User Info and Passwords:" >> $FILE
         chmod 000 $FILE 
         echo "Password file created in $PASSWORDS"
     fi
@@ -243,6 +242,9 @@ function remove {
     
     # Removes 4 lines from STARTLINE-ENDLINE from password file
     sed -i.bak "${STARTLINE},${ENDLINE}d" $FILE
+    
+    # remove the backup file
+    rm -f $FILE.bak
 
     echo 'Password successfully removed'
 
@@ -251,6 +253,9 @@ function remove {
 # Prompt for root password    
 if [ $EUID != 0 ]; then
     sudo "$0" "$@"
+    cd ~
+    cat file | clip.exe
+    rm -f tmppsfile
     exit $?
 fi
 
