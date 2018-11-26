@@ -16,12 +16,12 @@ PLATFORM=$2
 # parameters: platform-name
 # retrieves and copys a password to the clipboard 
 function get {
-
+    
     # change into directory containing password file
     cd $PASSWORDS
 
     # search for that platform within the file
-    OUTPUT=`cat $FILE | grep -i $1`
+    OUTPUT=`sudo cat $FILE | grep -i $1`
 
     TEST=`echo $OUTPUT | cut -c1-7`
     
@@ -44,7 +44,7 @@ function get {
     fi
 
     # Ignore case, add line number
-    OUTPUT=`grep -inr $1 $FILE`
+    OUTPUT=`sudo grep -inr $1 $FILE`
 
     # Remove and store just the line number
     LINENUMBER=`echo ${OUTPUT%%:*}` 
@@ -53,19 +53,15 @@ function get {
     LINENUMBER=$((LINENUMBER+1))
 
     # Prints out username
-    echo `cat $FILE | head -n $LINENUMBER | tail -n 1` 
+    echo `sudo cat $FILE | head -n $LINENUMBER | tail -n 1` 
 
     # Change line number to the line with password rather than the username
     LINENUMBER=$((LINENUMBER+1))
 
-    # Copys password to the clipboard
-    # LINUX VERSION
-    echo `cat $FILE | head -n $LINENUMBER | tail -n 1 | cut -c11-27` | xclip -sel clip
-    # MAC VERSION   
-    # echo `cat $FILE | head -n $LINENUMBER | tail -n 1 | cut -c11-27` | pbcopy
-    # WINDOWS SUBSYSTEM VERSION 
-    # echo `cat $FILE | head -n $LINENUMBER | tail -n 1 | cut -c11-27` | clip.exe
+    echo `sudo cat $FILE | head -n $LINENUMBER | tail -n 1` 
 
+    # Copys password to the clipboard
+    echo `sudo cat $FILE | head -n $LINENUMBER | tail -n 1 | cut -c11-27` | clip.exe
     echo *Password copied to clipboard*
 
 }
@@ -260,7 +256,10 @@ fi
 
 # No modifier passed in
 if [ "$#" == 0 ]; then
-    echo $USAGE
+    echo $USAGEGET
+    echo $USAGEEDIT
+    echo $USAGEREMOVE
+    echo $USAGEADD
     exit 1
 fi
 
