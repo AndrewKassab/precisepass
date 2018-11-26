@@ -254,12 +254,6 @@ function remove {
 
 }
 
-# Prompt for root password    
-if [ $EUID != 0 ]; then
-    sudo "$0" "$@"
-    exit $?
-fi
-
 # No modifier passed in
 if [ "$#" == 0 ]; then
     echo $USAGEGET
@@ -267,6 +261,12 @@ if [ "$#" == 0 ]; then
     echo $USAGEREMOVE
     echo $USAGEADD
     exit 1
+fi
+
+# Prompt for root password    
+if [ $EUID != 0 ]; then
+    sudo "$0" "$@"
+    exit $?
 fi
 
 # Check to see which function should be called
