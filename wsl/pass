@@ -27,10 +27,10 @@ function get {
     # search for that platform within the file
     OUTPUT=`cat $FILE | grep -i $1`
 
+    # cut out 'Account' characters
     TEST=`echo $OUTPUT | cut -c1-7`
     
-    # check if platform is valid by starting first with
-    # Account:
+    # check if platform is valid by starting with Account:
     if [ "$TEST" != "Account" ]; then
     	echo 'Invalid Platform / Account'
     	exit 1
@@ -91,6 +91,18 @@ function add {
         echo -n 'Enter platform name: '
         read PLAT
     done
+
+    # search for that platform within the file
+    OUTPUT=`cat $FILE | grep -i $PLAT`
+
+    # cut out 'Account' characters
+    TEST=`echo $OUTPUT | cut -c1-7`
+    
+    # check if platform already exists by starting with Account
+    if [ "$TEST" == "Account" ]; then
+    	echo "A password already exists for $PLAT"
+    	exit 1
+    fi
 
     # User / Account name
     echo -n 'Enter user name: '
