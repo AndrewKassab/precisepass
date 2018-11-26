@@ -75,6 +75,7 @@ function add {
     # First time user, create password file and set permissions
     if [ ! -f $FILE ]; then
         touch $FILE
+        echo "User Info and Passwords:" >> $FILE
         chmod 000 $FILE 
         echo "Password file created in $PASSWORDS"
     fi
