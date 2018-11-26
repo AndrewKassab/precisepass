@@ -23,11 +23,10 @@ cd linux (or wsl, or mac)
 - pass -e (edit) platform: Allows the user to edit and change the password for 'platform'
 - pass -r (remove) platform: Allows the user to remove 'platform' from the password file
 
-# Extra information / How it works
-On first use, a password file is created in the user's /etc directory. The privileges are automatically set so that it can only be accessed with root / administrative priviledges. Use of the script will also require root, so the script will prompt the user for a password upon use if they are not already within a sudo / root session. The manager works by searching for specific key words in that password file and retrieving the text that follows them. Make sure you are not creating multiple instances of the same platform name.
+# Extra information
+On first use, a password file is created in the user's /etc directory. The privileges are automatically set so that it can only be accessed with root / administrative priviledges. Use of the script will also require root, so the script will prompt the user for a password upon use if they are not already within a sudo / root session. The manager works by searching for specific key words in that password file and retrieving the text that follows them. Make sure you are not creating multiple instances of the same platform.
 
 # What I learned:
-
   - Logic of scripting in bash
   - Using linux variables
   - Basic commands in linux
