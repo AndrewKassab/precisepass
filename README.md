@@ -1,40 +1,28 @@
 # precisepass
 
-  This is a simple password manager that works both natively on Linux or on the Windows Subsystem for Linux.
-  This password manager can easily retrieve your passwords and copy them to your clipboard.
+  This is a simple password manager that works on Linux, Mac, and the Windows Subsystem for Linux.
+  It's secure, easy to use, and works completely offline. 
   
-# Project Details
+# BEFORE USING:
+ - After cloning, navigate to the proper directory containing the pass file meant for your platform and use the following commands.
+ 1. chmod 500 pass 
+ 2. sudo cp pass /usr/bin
+ - You should now be good to go! Feel free to delete all other files after copying the script to your PATH. Go ahead and use pass -a to create the password file and begin adding passwords.
 
-  This project was created as a way for me to get more familiar with bash scripting and linux commands in 
-  general. I already keep my passwords in a hidden file as backup and had the idea of creating a tool 
-  to retrieve them and just expanded upon that.
+# USAGE
+- pass -a (add): Prompts the user to add a new platform to the password file
+- pass -g (get) platform: Retreives the password for 'platform' and copys it to the clipboard
+- pass -e (edit) platform: Allows the user to edit and change the password for 'platform'
+- pass -r (remove) platform: Allows the user to remove 'platform' from the password file
+
+# Extra information / security 
+On first use, a password file is created in the user's /etc directory. The privileges are automatically set to 000, so that it can only be accessed with root / administrative priviledges. Use of the script will also require root, so the script will prompt the user for a password upon use if they are not already within a sudo / root session. 
 
 # What I learned:
 
-  - Logic of scripting in bash (if-statements, etc.)
+  - Logic of scripting in bash
   - Using linux variables
   - Basic commands in linux
   - Passing in parameters to a script
   - Turning scripts into commands in the linux environment 
   - Adapting the script to work on different platforms
-  
-# Goals
-  
-  - Eliminate need for several scripts, instead use modifiers -g (get) -a (add) -e (edit)
-  - Add encription to passwords 
-  
-# BEFORE USING: 
-- You must first create an empty password.txt file.
-- The scripts must be edited to include the directory path for the password file and the name of the password file.
-- Change the MASTERPASS variable in getpass.sh and editpass.sh to a custom password that allows access to the rest.
-- Move all 3 scripts into /usr/bin or an appropriate PATH. 
-
-IF USING WINDOWS SUBSYSTEM FOR LINUX: 
-- You must edit the getpass.sh file on line 65 and remove the hash character in order to uncomment the line. 
-- You must also remove or comment out line 67 by adding the hash character. 
-* This is because on linux we use the Xclip command to copy the lines to the clipboard while Windows uses clip.exe
-
-# USAGE / MANUAL:
-- addpass: type addpass and you will be prompted for the name of the platform, username, and password being added.
-- getpass: getpass "platform_name" , will return the password for the platform parameter you include, E.G, getpass bank.
-- editpass: editpass "platform_name", allows you to change the password for the platform parameter, E.G, editpass bank.
