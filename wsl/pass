@@ -279,7 +279,7 @@ fi
 if [ $EUID != 0 ]; then
     sudo "$0" "$@"
     cd ~
-    cat file | clip.exe
+    cat tmppsfile | clip.exe
     rm -f tmppsfile
     exit $?
 fi
