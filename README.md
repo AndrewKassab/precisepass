@@ -1,6 +1,6 @@
 # precisepass
 
-  PrecisePass is a secure, offline, and easy to use password manager written in bash that works on the terminal in Linux, Mac, and the Windows Subsystem for Linux. 
+  PrecisePass is a secure, offline, and easy to use password manager written in bash that works on the terminal in Linux, Mac (UNDER CONSTRUCTION) , and the Windows Subsystem for Linux. 
   
 # BEFORE USING:
 - First, clone the repository and move into a proper directory that contains the pass file for your platform.
