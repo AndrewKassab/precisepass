@@ -279,8 +279,9 @@ fi
 if [ $EUID != 0 ]; then
     sudo "$0" "$@"
     cd ~
-    cat tmppsfile | clip.exe
-    rm -f tmppsfile
+    # copy password to clipboard , redirect if not using get
+    ( cat tmppsfile | clip.exe ) 2> /dev/null
+    rm -f tmppsfile 2> /dev/null
     exit $?
 fi
 
