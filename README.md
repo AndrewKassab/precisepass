@@ -25,7 +25,7 @@ cd linux (or wsl, or mac)
 
 # Normal / Example Output
 ```
-pass -g amazon
+_name_@pc_name:~$ pass -g amazon
 [sudo] password for _name_:
 Account: Amazon
 Is this the correct account? (Y/n): y
