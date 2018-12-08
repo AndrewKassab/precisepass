@@ -23,6 +23,15 @@ cd linux (or wsl, or mac)
 - pass -e (edit) platform: Allows the user to edit and change the password for 'platform'
 - pass -r (remove) platform: Allows the user to remove 'platform' from the password file
 
+# Normal / Example Output
+```
+pass -g amazon
+[sudo] password for _name_:
+Account: Amazon
+Is this the correct account? (Y/n): y
+Username: myusername@gmail.com
+*Password copied to clipboard*
+```
 # Extra information / Security
 On first use, a password file is created in the user's /etc directory. The privileges are automatically set so that it can only be accessed with root / administrative priviledges. Use of the script will also require root, so the script will prompt the user for a password upon use if they are not already within a sudo / root session. The manager works by searching for specific key words in that password file and retrieving the text that follows them.
 
