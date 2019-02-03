@@ -5,7 +5,7 @@
 # BEFORE USING:
 - First, clone the repository and move into a proper directory that contains the pass file for your platform.
 ```
-git clone https://github.com/precisemotion/precisepass
+git clone https://github.com/andrewkassab/precisepass
 cd precisepass
 cd linux (or wsl, or mac)
 ```
