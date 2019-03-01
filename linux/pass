@@ -5,10 +5,10 @@
 # Date: 11/25/2018
 
 # Usage statements
-USAGEEDIT="Usage: pass -e (edit) platform-name"    
-USAGEGET="Usage: pass -g (get)  platform-name"
-USAGEREMOVE="Usage: pass -r (remove) platform-name"
-USAGEADD="Usage: pass -a (add)"
+USAGEEDIT="Usage: pass -e (--edit) platform-name"    
+USAGEGET="Usage: pass -g (--get)  platform-name"
+USAGEREMOVE="Usage: pass -r (--remove) platform-name"
+USAGEADD="Usage: pass -a (--add)"
 #Directory Containing Passwords
 PASSWORDS=/etc
 #File Containing Passwords
@@ -280,6 +280,17 @@ fi
 if [ $EUID != 0 ]; then
     sudo "$0" "$@"
     exit $?
+fi
+
+# Convert full commands to shorthand
+if [ $MODIFIER = "--get" ]; then
+    MODIFIER="-g"
+elif [ $MODIFIER = "--add" ]; then
+    MODIFIER="-a"
+elif [ $MODIFIER = "--edit" ]; then
+    MODIFIER="-e"
+elif [ $MODIFIER = "--remove" ]; then
+    MODIFIER="-r"
 fi
 
 # Check to see which function should be called
