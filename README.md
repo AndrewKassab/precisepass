@@ -1,11 +1,11 @@
-# precisepass
+# precisepass (v2.0)
 
   PrecisePass is a secure, offline, and easy to use password manager written in bash that works on the terminal in Linux and the Windows Subsystem for Linux. ( MAC version in the works ) 
   
 # BEFORE USING:
 - First, clone the repository and move into a proper directory that contains the pass file for your platform.
 ```
-git clone https://github.com/precisemotion/precisepass
+git clone https://github.com/andrewkassab/precisepass
 cd precisepass
 cd linux (or wsl, or mac)
 ```
@@ -39,3 +39,5 @@ On first use, a password file is created in the user's /etc directory. The privi
 - Finish Mac Version
 - Allow user to generate a password when adding passwords 
 - Add option flag -d after -g to display the password on screen instead of just copying it
+- Filter for already existing phrases when adding new platforms
+- Add in tab completion for getting password
