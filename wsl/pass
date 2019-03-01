@@ -25,7 +25,7 @@ function get {
     cd $PASSWORDS
 
     # search for that platform within the file
-    OUTPUT=`cat $FILE | grep -i $1`
+    OUTPUT=`cat $FILE | grep -i "\<$1\>"`
 
     # cut out 'Account' characters
     TEST=`echo $OUTPUT | cut -c1-7`
