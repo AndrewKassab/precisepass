@@ -1,4 +1,4 @@
-# precisepass (v3.0)
+# precisepass (v3.01)
 
   PrecisePass is a secure, offline, and easy to use password manager written in bash that works on the terminal in Linux and the Windows Subsystem for Linux. ( MAC version in the works ) 
   
