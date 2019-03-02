@@ -7,25 +7,6 @@
 OPTS="--add --get --edit --remove --help"
 PLATFORMS=`cat /etc/platforms.txt` 
 
-# Get the amount of passwords from our password file
-# NUMPASSWORDS=`sudo grep Account: /etc/passwords.txt | wc -l`
-# COUNTER=1
-
-# loop over and grab each platform to add it to autocompletion
-# while [ $COUNTER -le $NUMPASSWORDS ]; do
-#    OUTPUT=`sudo grep Account: /etc/passwords.txt | sed -n ${COUNTER}p`
-#    # Removes the "Account: " keyword"
-#    PLATFORM=${OUTPUT:9}
-#    # Extracts only the first word of the platform name
-#    PLATFORM=`echo $PLATFORM | cut -d' ' -f1`
-#    # convert to lowercase 
-#    PLATFORM=`echo $PLATFORM | tr '[:upper:]' '[:lower:]'`
-#    # Add to platforms 
-#    PLATFORMS+="$PLATFORM "
-#    # move to next line of grep output
-#    let COUNTER=COUNTER+1
-#done
-
 # handles completions 
 opt_completions(){
     
