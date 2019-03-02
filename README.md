@@ -12,7 +12,7 @@
 ```
 git clone https://github.com/andrewkassab/precisepass
 cd precisepass
-cd linux (or wsl, if you are on windows subsystem for linx)
+cd linux (or wsl)
 ```
 - After cloning and changing into the corresponding directory, use the following command.
  ```
