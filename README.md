@@ -1,7 +1,12 @@
-# precisepass (v2.2)
+# precisepass (v3.0)
 
   PrecisePass is a secure, offline, and easy to use password manager written in bash that works on the terminal in Linux and the Windows Subsystem for Linux. ( MAC version in the works ) 
   
+# FEATURES 
+  - Add, retrieve, edit, and remove passwords quickly and efficiently.
+  - Tab auto completion for commands and password retrieval.
+  - Copy to clipboard
+ 
 # BEFORE USING:
 - First, clone the repository and move into a proper directory that contains the pass file for your platform.
 ```
@@ -12,16 +17,24 @@ cd linux (or wsl, or mac)
 - After cloning and changing into the corresponding directory, use the following commands.
  ```
  chmod 500 pass 
+ chmod 500 pass-completion
  sudo mv pass /usr/local/bin
+ sudo mv pass-completion /usr/local/bin
  ```
- - You should now be good to go! Feel free to delete all other files after copying the script to your PATH. Go ahead and use pass -a to create the password file and begin adding passwords.
+ - Now, for bash's tab autocompletion to work, you must open and add the following to
+   your .bashrc file
+ ```
+ source /usr/local/bin/pass-completion
+ ```
+ - You should now be good to go! Feel free to delete all other files after copying the files
+ to your PATH. Go ahead and use pass --a to create the password file and begin adding passwords.
 
 # USAGE
 - pass : Displays usage when no parameter is passed in
-- pass -a (add): Prompts the user to add a new platform to the password file
-- pass -g (get) platform: Retreives the password for 'platform' and copys it to the clipboard
-- pass -e (edit) platform: Allows the user to edit and change the password for 'platform'
-- pass -r (remove) platform: Allows the user to remove 'platform' from the password file
+- pass -a (--add): Prompts the user to add a new platform to the password file
+- pass -g (--get) platform: Retreives the password for 'platform' and copys it to the clipboard
+- pass -e (--edit) platform: Allows the user to edit and change the password for 'platform'
+- pass -r (--remove) platform: Allows the user to remove 'platform' from the password file
 
 # Normal / Example Output
 ```
@@ -39,4 +52,3 @@ On first use, a password file is created in the user's /etc directory. The privi
 - Finish Mac Version
 - Allow user to generate a password when adding passwords 
 - Add option flag -d after -g to display the password on screen instead of just copying it
-- Add in tab completion for getting password
