@@ -13,9 +13,10 @@ USAGEADD="Usage: pass -a (--add)"
 PASSWORDS=/etc
 #File Containing Passwords
 FILE=passwords.txt
-# For tab auto completion
-COMPLETION_SOURCE=/usr/local/bin/pass-completion
+# File Containing all platforms, For tab auto completion
+PLAT_FILE=platforms.txt
 
+PLATFORMS=""
 MODIFIER=$1
 PLATFORM=$2
 
@@ -147,6 +148,9 @@ function add {
     exit 1
     fi
 
+    # update platforms file
+    updatePlatforms 
+
 }
 
 # function: edit
@@ -267,6 +271,36 @@ function remove {
 
     echo 'Password successfully removed'
 
+    # update platforms file
+    updatePlatforms 
+
+}
+
+# function: updatePlatforms
+# Updates the platforms text file for updated auto completions
+function updatePlatforms {
+
+    # Get the amount of passwords from our password file
+    NUMPASSWORDS=`sudo grep Account: /etc/passwords.txt | wc -l`
+    COUNTER=1
+
+    # loop over and grab each platform to add it to autocompletion
+    while [ $COUNTER -le $NUMPASSWORDS ]; do
+        OUTPUT=`sudo grep Account: /etc/passwords.txt | sed -n ${COUNTER}p`
+        # Removes the "Account: " keyword"
+        PLATFORM=${OUTPUT:9}
+        # Extracts only the first word of the platform name
+        PLATFORM=`echo $PLATFORM | cut -d' ' -f1`
+        # convert to lowercase 
+        PLATFORM=`echo $PLATFORM | tr '[:upper:]' '[:lower:]'`
+        # Add to platforms 
+        PLATFORMS+="$PLATFORM "
+        # move to next line of grep output
+        let COUNTER=COUNTER+1
+    done
+
+    # put all platforms in platform file for auto completion loading
+    echo $PLATFORMS > $PASSWORDS/$PLAT_FILE
 }
 
 # No modifier passed in
@@ -347,21 +381,4 @@ case "$MODIFIER" in
         ;;
 esac
 
-# update auto-completion in case of new or removed password platforms 
-source $COMPLETION_SOURCE
-
 # END
-# loop over and grab each platform to add it to autocompletion
-# while [ $COUNTER -le $NUMPASSWORDS ]; do
-#    OUTPUT=`sudo grep Account: /etc/passwords.txt | sed -n ${COUNTER}p`
-#    # Removes the "Account: " keyword"
-#    PLATFORM=${OUTPUT:9}
-#    # Extracts only the first word of the platform name
-#    PLATFORM=`echo $PLATFORM | cut -d' ' -f1`
-#    # convert to lowercase 
-#    PLATFORM=`echo $PLATFORM | tr '[:upper:]' '[:lower:]'`
-#    # Add to platforms 
-#    PLATFORMS+="$PLATFORM "
-#    # move to next line of grep output
-#    let COUNTER=COUNTER+1
-#done
