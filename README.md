@@ -16,13 +16,10 @@ cd linux (or wsl, or mac)
 ```
 - After cloning and changing into the corresponding directory, use the following commands.
  ```
- chmod 500 pass 
- chmod 500 pass-completion
- sudo mv pass /usr/local/bin
- sudo mv pass-completion /usr/local/bin
+ install pass pass-completion /usr/local/bin 
  ```
- - Now, for bash's tab autocompletion to work, you must open and add the following to
-   your .bashrc file
+ - Now, for bash's tab autocompletion to work, you must open and add the following line to
+   your .bashrc file in your home directory
  ```
  source /usr/local/bin/pass-completion
  ```

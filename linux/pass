@@ -1,7 +1,7 @@
 #!/bin/bash
 # Name: precisepass 
 # Author: Andrew Kassab (https://github.com/AndrewKassab)
-# Version: 3.0
+# Version: 3.01
 # Date: 03/01/2019
 
 # Usage statements
@@ -47,7 +47,7 @@ function get {
 
     # If the user responds no
     if [ ! -z "$RESPONSE" ] && ([ $RESPONSE != "y" ] && [ $RESPONSE != "Y" ]); then
-      echo 'Use more specific account name.'
+      echo 'Use more specific account name. ( tab for options )'
       exit 1
     fi
 
@@ -98,7 +98,7 @@ function add {
     done
 
     # search for that platform within the file
-    OUTPUT=`cat $FILE | grep -i $PLAT`
+    OUTPUT=`cat $FILE | grep -i "Account: \<$PLAT\>"`
     
     # cut out 'Account' characters
     TEST=`echo $OUTPUT | cut -c1-7`
@@ -182,7 +182,7 @@ function edit {
 
     # If the user responds no
     if [ -z "$RESPONSE" ] || ([ $RESPONSE != "y" ] && [ $RESPONSE != "Y" ]); then
-        echo 'Use more specific account name.'
+        echo 'Use more specific account name. ( tab for options )'
         exit 1
     fi
 
@@ -240,7 +240,7 @@ function remove {
 
     # If the user responds no
     if [ -z "$RESPONSE" ] || ([ $RESPONSE != "y" ] && [ $RESPONSE != "Y" ]); then
-        echo 'Use more specific account name.'
+        echo 'Use more specific account name. ( tab for options )'
         exit 1
     fi
 
