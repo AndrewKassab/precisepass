@@ -51,4 +51,5 @@ On first use, a password file is created in the user's /etc directory. The privi
 # Goals / Improvements 
 - Finish Mac Version
 - Allow user to generate a password when adding passwords 
-- Add option flag -d after -g to display the password on screen instead of just copying it
+- Detect OS type to make installation simpler
+- Add option flag -d after -g to display the password on screen instead of just copying it.
