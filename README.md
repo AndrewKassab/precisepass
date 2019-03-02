@@ -12,14 +12,14 @@
 ```
 git clone https://github.com/andrewkassab/precisepass
 cd precisepass
-cd linux (or wsl, or mac)
+cd linux (or wsl, if you are on windows subsystem for linx)
 ```
-- After cloning and changing into the corresponding directory, use the following commands.
+- After cloning and changing into the corresponding directory, use the following command.
  ```
  install pass pass-completion /usr/local/bin 
  ```
  - Now, for bash's tab autocompletion to work, you must open and add the following line to
-   your .bashrc file in your home directory
+   your .bashrc file in your home directory.
  ```
  source /usr/local/bin/pass-completion
  ```
