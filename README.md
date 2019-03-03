@@ -53,3 +53,4 @@ On first use, a password file is created in the user's /etc directory. The privi
 - Allow user to generate a password when adding passwords 
 - Detect OS type to make installation simpler
 - Add option flag -d after -g to display the password on screen instead of just copying it.
+- Allow less than full words to search for a platform. 
