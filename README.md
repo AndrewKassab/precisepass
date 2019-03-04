@@ -16,7 +16,7 @@ cd linux (or wsl)
 ```
 - After cloning and changing into the corresponding directory, use the following command.
  ```
- install pass pass-completion /usr/local/bin 
+ sudo install pass pass-completion /usr/local/bin 
  ```
  - Now, for bash's tab autocompletion to work, you must open and add the following line to
    your .bashrc file in your home directory.
