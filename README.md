@@ -21,7 +21,7 @@ cd linux (or wsl)
  - Now, for bash's tab autocompletion to work, you must open and add the following line to
    your .bashrc file in your home directory.
  ```
- source /usr/local/bin/pass-completion
+ source pass-completion
  ```
  - You should now be good to go! Feel free to delete all other files after copying the files
  to your PATH. Go ahead and use pass --a to create the password file and begin adding passwords.
