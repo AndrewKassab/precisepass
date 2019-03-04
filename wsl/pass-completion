@@ -18,15 +18,26 @@ opt_completions(){
         COMPREPLY=($(compgen -W "${OPTS}" -- $cur) ) 
     elif [ $COMP_CWORD -eq 2 ]; then
         case "$prev" in
-            "--add")
-                return
-                ;;
-            "--help")
-                return 
-                ;;
-            *)
+            "-g")
                 COMPREPLY=($(compgen -W "${PLATFORMS}" -- $cur))
                 ;;
+            "-e")
+                COMPREPLY=($(compgen -W "${PLATFORMS}" -- $cur))
+                ;;
+            "-r")
+                COMPREPLY=($(compgen -W "${PLATFORMS}" -- $cur))
+                ;;
+            "--get")
+                COMPREPLY=($(compgen -W "${PLATFORMS}" -- $cur))
+                ;;
+            "--edit")
+                COMPREPLY=($(compgen -W "${PLATFORMS}" -- $cur))
+                ;;
+            "--remove")
+                COMPREPLY=($(compgen -W "${PLATFORMS}" -- $cur))
+                ;;
+            *)
+                return
         esac
     fi
 }
