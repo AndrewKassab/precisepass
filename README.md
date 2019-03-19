@@ -16,15 +16,11 @@ cd linux (or wsl)
 ```
 - After cloning and changing into the corresponding directory, use the following command.
  ```
- sudo install pass pass-completion /usr/local/bin 
+ sudo install pass /usr/local/bin 
+ sudo install pass-completion /etc/bash_completion.d/
  ```
- - Now, for bash's tab autocompletion to work, you must open and add the following line to
-   your .bashrc file in your home directory.
- ```
- source pass-completion
- ```
- - You should now be good to go! Feel free to delete all other files after copying the files
- to your PATH. Go ahead and use pass --a to create the password file and begin adding passwords.
+ - You should now be good to go! Feel free to delete all other files after installing the files
+ to your PATH. Go ahead and use pass -a to create the password file and begin adding passwords.
 
 # USAGE
 - pass : Displays usage when no parameter is passed in
@@ -46,7 +42,11 @@ Username: myusername@gmail.com
 *Password copied to clipboard
 ```
 # Extra information / Security
-On first use, a password file is created in the user's /etc directory. The privileges are automatically set so that it can only be accessed with root / administrative priviledges. Use of the script will also require root, so the script will prompt the user for a password upon use if they are not already within a sudo / root session. The manager works by searching for specific key words in that password file and retrieving the text that follows them.
+On first use, a password file is created in the user's /etc directory. The privileges 
+are automatically set so that it can only be accessed with root / administrative priviledges.
+Use of the script will also require root, so the script will prompt the user for a password 
+upon use if they are not already within a sudo / root session. The manager works by searching 
+for specific key words in that password file and retrieving the text that follows them.
 
 # Goals / Improvements 
 - Finish Mac Version
@@ -54,3 +54,4 @@ On first use, a password file is created in the user's /etc directory. The privi
 - Detect OS type to make installation simpler
 - Add option flag -d after -g to display the password on screen instead of just copying it. 
 - Add option --list to list all platforms that have been stored 
+- fix platform file refresh to happen faster ( when using add and remove )
