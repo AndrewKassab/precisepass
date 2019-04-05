@@ -10,7 +10,7 @@ USAGEGET="Usage: pass -g (--get)  platform-name"
 USAGEREMOVE="Usage: pass -r (--remove) platform-name"
 USAGEADD="Usage: pass -a (--add)"
 #Directory Containing Passwords
-PASSWORDS=/etc
+PASSWORDS=~/.precisepass
 #File Containing Passwords
 FILE=passwords.txt
 # File Containing all platforms, For tab auto completion
@@ -75,6 +75,10 @@ function get {
 # function: add
 # adds a password to the password file
 function add {
+
+    if [ ! -d "$PASSWORDS" ]; then
+      mkdir $PASSWORDS
+    fi
 
     # change into directory containing passwords
     cd $PASSWORDS
@@ -286,7 +290,7 @@ function updatePlatforms {
 
     # loop over and grab each platform to add it to autocompletion
     while [ $COUNTER -le $NUMPASSWORDS ]; do
-        OUTPUT=`sudo grep Account: /etc/passwords.txt | sed -n ${COUNTER}p`
+        OUTPUT=`sudo grep Account: $PASSWORDS/$FILE | sed -n ${COUNTER}p`
         # Removes the "Account: " keyword"
         PLATFORM=${OUTPUT:9}
         # Extracts only the first word of the platform name

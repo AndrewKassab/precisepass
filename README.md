@@ -42,7 +42,7 @@ Username: myusername@gmail.com
 *Password copied to clipboard
 ```
 # Extra information / Security
-On first use, a password file is created in the user's /etc directory. The privileges 
+On first use, a password file is created and the privileges 
 are automatically set so that it can only be accessed with root / administrative priviledges.
 Use of the script will also require root, so the script will prompt the user for a password 
 upon use if they are not already within a sudo / root session. The manager works by searching 
@@ -55,3 +55,4 @@ for specific key words in that password file and retrieving the text that follow
 - Add option flag -d after -g to display the password on screen instead of just copying it. 
 - Add option --list to list all platforms that have been stored 
 - fix platform file refresh to happen faster ( when using add and remove )
+- Check for .precisepass directory before first use

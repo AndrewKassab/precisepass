@@ -5,7 +5,12 @@
 # Date: 03-01-2019
 
 OPTS="--add --get --edit --remove --help"
-PLATFORMS=`cat /etc/platforms.txt` 
+
+if [ -d ~/.precisepass ]; then
+    PLATFORMS=`cat ~/.precisepass/platforms.txt` 
+else 
+    PLATFORMS=''
+fi
 
 # handles completions 
 opt_completions(){
@@ -38,6 +43,7 @@ opt_completions(){
                 ;;
             *)
                 return
+                ;;
         esac
     fi
 }
