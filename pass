@@ -1,0 +1,318 @@
+#!/bin/bash
+
+# Usage statements
+USAGEEDIT="Usage: pass -e (edit) platform-name"    
+USAGEGET="Usage: pass -g (get)  platform-name"
+USAGEREMOVE="Usage: pass -r (remove) platform-name"
+USAGEADD="Usage: pass -a (add)"
+#Directory Containing Passwords
+PASSWORDS=/etc
+#File Containing Passwords
+FILE=passwords.txt
+MODIFIER=$1
+PLATFORM=$2
+
+# function: get
+# parameters: platform-name
+# retrieves and copys a password to the clipboard 
+function get {
+
+    # change into directory containing password file
+    cd $PASSWORDS
+
+    # search for that platform within the file
+    OUTPUT=`cat $FILE | grep -i $1`
+
+    TEST=`echo $OUTPUT | cut -c1-7`
+    
+    # check if platform is valid by starting first with
+    # Account:
+    if [ "$TEST" != "Account" ]; then
+    	echo 'Invalid Platform / Account'
+    	exit 1
+    fi
+    
+    # Make sure we are retrieving the right password
+    echo $OUTPUT
+    echo -n "Is this the correct account? (Y/n): "
+    read RESPONSE
+
+    # If the user responds no
+    if [ ! -z "$RESPONSE" ] && ([ $RESPONSE != "y" ] && [ $RESPONSE != "Y" ]); then
+      echo 'Use more specific account name.'
+      exit 1
+    fi
+
+    # Ignore case, add line number
+    OUTPUT=`grep -inr $1 $FILE`
+
+    # Remove and store just the line number
+    LINENUMBER=`echo ${OUTPUT%%:*}` 
+
+    # Change line number to the line with user name rather than the platform
+    LINENUMBER=$((LINENUMBER+1))
+
+    # Prints out username
+    echo `cat $FILE | head -n $LINENUMBER | tail -n 1` 
+
+    # Change line number to the line with password rather than the username
+    LINENUMBER=$((LINENUMBER+1))
+
+    # Prints out password
+    echo `cat $FILE | head -n $LINENUMBER | tail -n 1` 
+
+    # Copys password to the clipboard
+    # LINUX VERSION
+    echo `cat $FILE | head -n $LINENUMBER | tail -n 1 | cut -c11-27` | xclip -sel clip
+    # MAC VERSION   
+    # echo `cat $FILE | head -n $LINENUMBER | tail -n 1 | cut -c11-27` | pbcopy
+    # WINDOWS SUBSYSTEM VERSION 
+    # echo `cat $FILE | head -n $LINENUMBER | tail -n 1 | cut -c11-27` | clip.exe
+
+    echo *Password copied to clipboard*
+
+}
+
+# function: add
+# adds a password to the password file
+function add {
+
+    # change into directory containing passwords
+    cd $PASSWORDS
+
+    # First time user, create password file and set permissions
+    if [ ! -f $FILE ]; then
+        touch $FILE
+        chmod 000 $FILE 
+        echo "Password file created in $PASSWORDS"
+    fi
+
+    # Platform 
+    echo -n 'Enter platform name: '
+    read PLAT
+    while [ -z "$PLAT" ]; do
+        echo 'Blank entry, try again'
+        echo -n 'Enter platform name: '
+        read PLAT
+    done
+
+    # User / Account name
+    echo -n 'Enter user name: '
+    read ACCOUNT
+    while [ -z $ACCOUNT ]; do
+        echo 'Blank entry, try again'
+        echo -n 'Enter user name: '
+        read ACCOUNT
+    done
+
+    # Password
+    echo -n 'Enter password: '
+    read PASS
+    while [ -z $PASS ]; do
+        echo 'Blank entry, try again'
+        echo -n 'Enter password: '
+        read PLAT
+    done
+
+    # Confirm with user
+    echo ''
+    echo "Account: $PLAT"
+    echo "Username: $ACCOUNT"
+    echo "Password: $PASS"
+    echo ''
+    echo -n 'Add entry? (y/N):'
+    read RESPONSE
+
+    # If the user responds yes
+    if [ ! -z "$RESPONSE" ] &&  ([ $RESPONSE == "y" ] || [ $RESPONSE == "Y" ]); then
+        echo '' >> $FILE
+        echo "Account: $PLAT" >> $FILE
+        echo "Username: $ACCOUNT" >> $FILE
+        echo "Password: $PASS" >> $FILE
+        echo 'Account and password successfully added'
+    # If the user responds no
+    else 
+    echo 'Entry canceled'
+    exit 1
+    fi
+
+}
+
+# function: edit
+# parameters: platform-name
+# edits a password for a platform already present in the file
+function edit {
+    
+    # change into directory containing passwords
+    cd $PASSWORDS
+
+    # find platform requested in password file
+    OUTPUT=`cat $FILE | grep -i $1`
+
+    # make sure platform is valid ( follows Account )
+    TEST=`echo $OUTPUT | cut -c1-7`
+    if [ "$TEST" != "Account" ]; then
+        echo 'Invalid Platform / Account'
+        exit 1
+    fi
+
+    # Search for the account ignoring case
+    OUTPUT=`grep -i $1 $FILE`
+
+    # confirm with user
+    echo $OUTPUT
+    echo -n "Is this the correct account? (y/N): "
+    read RESPONSE
+
+    # If the user responds no
+    if [ -z "$RESPONSE" ] || ([ $RESPONSE != "y" ] && [ $RESPONSE != "Y" ]); then
+        echo 'Use more specific account name.'
+        exit 1
+    fi
+
+    # Include line number
+    OUTPUT=`grep -inr $1 $FILE`
+
+    unset RESPONSE
+
+    # While the user responds no
+    while [ -z "$RESPONSE" ] || ([ $RESPONSE != "y" ] && [ $RESPONSE != "Y" ]); do
+        echo -n 'Enter new password: '
+        read NEWPASS
+        echo -n "Is this correct?: $NEWPASS (y/N): "
+        read RESPONSE
+    done
+
+    # Linenumber set to account line
+    LINENUMBER=`echo ${OUTPUT%%:*}` 
+
+    # Line changed to line containing password
+    LINENUMBER=$((LINENUMBER+2))
+
+    # Replaces line at LINENUMBER
+    sed -i "${LINENUMBER}s/.*/Password: ${NEWPASS}/" $FILE
+
+    echo 'Password successfully changed'
+
+}
+
+# function: remove
+# paramaters: platform-name 
+# removes a password from the password file
+function remove {
+    
+    # change into directory containing passwords
+    cd $PASSWORDS
+
+    # find the platform requested in the password file
+    OUTPUT=`cat $FILE | grep -i $1`
+
+    # make sure the platform is valid ( follows 'Account' )
+    TEST=`echo $OUTPUT | cut -c1-7`
+    if [ "$TEST" != "Account" ]; then
+        echo 'Invalid Platform / Account'
+        exit 1
+    fi
+
+    # Search for the account ignoring case
+    OUTPUT=`grep -i $1 $FILE`
+
+    # confirm account choice
+    echo $OUTPUT
+    echo -n "Is this the correct account? (y/N): "
+    read RESPONSE
+
+    # If the user responds no
+    if [ -z "$RESPONSE" ] || ([ $RESPONSE != "y" ] && [ $RESPONSE != "Y" ]); then
+        echo 'Use more specific account name.'
+        exit 1
+    fi
+
+    # Include line number
+    OUTPUT=`grep -inr $1 $FILE`
+
+    unset RESPONSE
+    
+    # confirm action
+    echo -n "Remove account and password?: (y/N): "
+    read RESPONSE
+    
+    # If the user responds no
+    if [ -z "$RESPONSE" ] || ([ $RESPONSE != "y" ] && [ $RESPONSE != "Y" ]); then
+        echo 'Exiting.'
+        exit 1
+    fi
+
+    # Linenumber set to account line
+    STARTLINE=`echo ${OUTPUT%%:*}`
+    STARTLINE=$(( $STARTLINE - 1 ))
+    ENDLINE=$(( $STARTLINE + 3 ))
+    
+    # Removes 4 lines from STARTLINE-ENDLINE from password file
+    sed -i.bak "${STARTLINE},${ENDLINE}d" $FILE
+
+    echo 'Password successfully removed'
+
+}
+
+# Prompt for root password    
+if [ $EUID != 0 ]; then
+    sudo "$0" "$@"
+    exit $?
+fi
+
+# No modifier passed in
+if [ "$#" == 0 ]; then
+    printf $USAGE
+    exit 1
+fi
+
+# Check to see which function should be called
+case "$MODIFIER" in
+    -g) #get 
+        # make sure usage is correct
+        if [ "$#" == 1 ] || [ "$#" -gt 2 ]; then
+            echo $USAGEGET
+            exit 1
+        fi
+        # call get
+        get $PLATFORM
+        ;;
+    -a) #add
+        # make sure usage is correct
+        if [ "$#" -gt 1 ]; then
+            echo $USAGEADD
+            exit 1
+        fi
+        # call add
+        add
+        ;;
+    -e) #edit
+        # make sure usage is correct
+        if [ "$#" == 1 ] || [ $# -gt 2 ]; then
+            echo $USAGEEDIT
+            exit 1
+        fi
+        # call edit
+        edit $PLATFORM
+        ;;
+    -r) #remove 
+        # make sure usage is correct
+        if [ "$#" == 1 ] || [ $# -gt 2 ]; then
+            echo $USAGEREMOVE
+            exit 1
+        fi
+        # call remove
+        remove $PLATFORM
+        ;;
+
+    *) # default
+        echo $USAGEGET
+        echo $USAGEEDIT
+        echo $USAGEREMOVE
+        echo $USAGEADD
+        exit 1
+        ;;
+esac
+
+# END
