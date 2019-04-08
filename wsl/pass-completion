@@ -13,7 +13,7 @@ else
 fi
 
 # handles completions 
-opt_completions(){
+pass_completions(){
     
     cur=${COMP_WORDS[COMP_CWORD]}
     prev=${COMP_WORDS[COMP_CWORD-1]}
@@ -48,4 +48,4 @@ opt_completions(){
     fi
 }
 
-complete -F opt_completions pass
+complete -F pass_completions pass

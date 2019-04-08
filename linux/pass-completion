@@ -4,7 +4,7 @@
 #              password manager.
 # Date: 03-01-2019
 
-OPTS="--add --get --edit --remove --help"
+PASSOPTS="--add --get --edit --remove --help"
 
 if [ -d ~/.precisepass ]; then
     PLATFORMS=`cat ~/.precisepass/platforms.txt` 
@@ -13,14 +13,14 @@ else
 fi
 
 # handles completions 
-opt_completions(){
+pass_completions(){
     
     cur=${COMP_WORDS[COMP_CWORD]}
     prev=${COMP_WORDS[COMP_CWORD-1]}
 
     # if we are on the 1st argument
     if [ $COMP_CWORD -eq 1 ]; then
-        COMPREPLY=($(compgen -W "${OPTS}" -- $cur) ) 
+        COMPREPLY=($(compgen -W "${PASSOPTS}" -- $cur) ) 
     elif [ $COMP_CWORD -eq 2 ]; then
         case "$prev" in
             "-g")
@@ -48,4 +48,4 @@ opt_completions(){
     fi
 }
 
-complete -F opt_completions pass
+complete -F pass_completions pass
