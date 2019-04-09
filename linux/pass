@@ -286,7 +286,7 @@ function remove {
 function updatePlatforms {
 
     # Get the amount of passwords from our password file
-    NUMPASSWORDS=`sudo grep Account: /etc/passwords.txt | wc -l`
+    NUMPASSWORDS=`sudo grep Account: $PASSWORDS/$FILE | wc -l`
     COUNTER=1
 
     # loop over and grab each platform to add it to autocompletion
