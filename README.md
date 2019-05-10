@@ -42,14 +42,16 @@ Username: myusername@gmail.com
 *Password copied to clipboard
 ```
 # Extra information / Security
-On first use, a password file is created and the privileges are automatically 
+- **the manager does not encrypt passwords yet**
+- On first use, a password file is created and the privileges are automatically 
 set so that it can only be accessed with root / administrative priviledges.
 Usage of the script will also require root, so the script will prompt the user 
 for a password upon use if they are not already within a sudo / root session. 
 The manager works by searching for specific key words in that password file 
-and retrieving the text that follows them.
+and retrieving the text that follows them. 
 
 # Goals / Improvements 
+- Add Encryption
 - Finish Mac Version
 - Allow user to generate a password when adding passwords 
 - Detect OS type to make installation simpler
